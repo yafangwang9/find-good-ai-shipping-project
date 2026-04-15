@@ -43,6 +43,16 @@ cp -r github-trending/ .cursor/skills/github-trending/
 cp -r github-trending/ ~/.claude/skills/github-trending/
 ```
 
+## First-time Setup
+
+After installation, the skill will guide you through a one-time setup on first use:
+
+1. **Choose default time range** — Daily / Weekly / Monthly
+2. **Choose output language** — 中文 / English
+3. **TinyFish API key (optional)** — for author tweet enrichment
+
+Your preferences are saved to `config.json` automatically and reused in future sessions.
+
 ## Setup TinyFish API Key (Optional)
 
 Social media enrichment requires a TinyFish API key. Without it, you still get full GitHub Trending data.
@@ -124,6 +134,7 @@ The skill doesn't just search "project name" on Twitter (which returns KOL repos
 ```
 github-trending/
 ├── SKILL.md                        # Skill instructions (read by AI)
+├── config.json                     # User preferences (auto-generated on first use)
 ├── scripts/
 │   ├── fetch_trending.py           # GitHub trending scraper (zero deps)
 │   ├── search_social.py            # Author tweet search (GitHub API + TinyFish)

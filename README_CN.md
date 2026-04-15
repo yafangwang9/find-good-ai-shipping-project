@@ -43,6 +43,16 @@ cp -r github-trending/ .cursor/skills/github-trending/
 cp -r github-trending/ ~/.claude/skills/github-trending/
 ```
 
+## 首次使用配置
+
+安装完成后，首次使用时 Skill 会引导你完成一次性配置：
+
+1. **选择默认时间范围** — 今日 / 本周 / 本月
+2. **选择输出语言** — 中文 / English
+3. **配置 TinyFish API Key（可选）** — 用于获取作者推文
+
+偏好设置会自动保存到 `config.json`，后续使用无需重复配置。
+
 ## 配置 TinyFish API Key（可选）
 
 社交媒体内容获取需要 TinyFish API key。不配置也可以正常使用 GitHub Trending 功能。
@@ -124,6 +134,7 @@ python github-trending/scripts/fetch_trending_full.py \
 ```
 github-trending/
 ├── SKILL.md                        # Skill 指令文件（AI 读取）
+├── config.json                     # 用户偏好（首次使用时自动生成）
 ├── scripts/
 │   ├── fetch_trending.py           # GitHub 热门抓取（零依赖）
 │   ├── search_social.py            # 作者推文搜索（GitHub API + TinyFish）
