@@ -2,6 +2,8 @@
 
 # GitHub Trending Skill
 
+> **说明：** 目前仅支持 GitHub Trending 渠道，后续会增加更多合适的发现渠道。
+
 真正在 shipping 的 AI 项目，往往不在融资列表和新闻里。[GitHub Trending](https://github.com/trending) 是发现它们的好方式。这个 Skill 帮你按每天或每周获取热门开源项目，并借助 [TinyFish](https://tinyfish.ai) 获取项目作者发布的社交媒体帖子——帮你判断这个项目的团队/作者是否值得 follow。
 
 ## 工作流程
