@@ -1,0 +1,147 @@
+# GitHub Trending Skill
+
+真正在 shipping 产品的项目，往往不在融资列表和新闻里。[GitHub Trending](https://github.com/trending) 是发现它们的好方式。这个 Skill 帮你按每天或每周获取热门开源项目，并借助 [TinyFish](https://tinyfish.ai) 获取项目作者发布的社交媒体帖子——帮你判断这个项目的团队/作者是否值得 follow。
+
+The best shipping products are rarely in funding lists or news. [GitHub Trending](https://github.com/trending) is where you find them. This skill fetches trending repos daily or weekly, and optionally pulls the authors' own social media posts via [TinyFish](https://tinyfish.ai) — helping you decide which builders are worth following.
+
+## How It Works
+
+```
+Step 0   Ask: daily or weekly? Chinese or English?
+            |
+Phase 1  Fetch GitHub Trending → present results (instant)
+            |
+Phase 2  Resolve author Twitter via GitHub API
+(optional)  → Search author's tweets via TinyFish
+            → Present with project details
+```
+
+**Phase 1** is instant and requires no API key. **Phase 2** is optional, requires a free TinyFish API key, and prioritizes tweets from the project author themselves — not KOL reposts.
+
+## Install
+
+### Cursor
+
+```bash
+# Personal (available across all projects)
+cp -r github-trending/ ~/.cursor/skills/github-trending/
+
+# Or project-specific
+cp -r github-trending/ .cursor/skills/github-trending/
+```
+
+### Claude.ai
+
+1. Zip the `github-trending/` folder
+2. Settings → Capabilities → Skills → Upload
+
+### Claude Code
+
+```bash
+cp -r github-trending/ ~/.claude/skills/github-trending/
+```
+
+## Setup TinyFish API Key (Optional)
+
+Social media enrichment requires a TinyFish API key. Without it, you still get full GitHub Trending data.
+
+Get your key: [agent.tinyfish.ai/api-keys](https://agent.tinyfish.ai/api-keys)
+
+```bash
+# Set once, never asked again
+export TINYFISH_API_KEY="sk-tinyfish-your-key-here"
+```
+
+## Usage
+
+Once installed, the skill triggers when you ask about GitHub trending:
+
+- "今日 GitHub 热门项目"
+- "Show me this week's trending repos"
+- "本周 Rust 热门项目"
+- "What's trending on GitHub?"
+
+### What You Get
+
+**Phase 1 — Trending repos (instant):**
+
+```
+1. forrestchang/andrej-karpathy-skills — Stars 37,254 / Today +9,263
+   A CLAUDE.md file to improve Claude Code behavior
+
+2. thedotmack/claude-mem — Stars 56,521 / Today +2,997
+   Claude Code persistent memory plugin
+...
+```
+
+**Phase 2 — Author tweets (optional, ~3 min for 12 repos):**
+
+```
+1. forrestchang/andrej-karpathy-skills — Stars 37,254 / Today +9,263
+   Author: Jiayuan Zhang (@jiayuan_jy)
+
+   - I let Claude Code turn @karpathy's post into agent skills.
+     It first generated a bunch of skill files and around 800 lines...
+
+   - To fix this, a dev turned those observations into a project
+     called andrej-karpathy-skills. It's just a single CLAUDE.md...
+```
+
+### Manual Script Usage
+
+```bash
+# Trending repos (no API key needed)
+python github-trending/scripts/fetch_trending.py --since daily --count 12 --format json
+
+# Weekly trending in Python
+python github-trending/scripts/fetch_trending.py --since weekly --language python
+
+# Author tweets for specific repos
+python github-trending/scripts/search_social.py \
+  --repos "microsoft/markitdown,forrestchang/andrej-karpathy-skills" \
+  --api-key YOUR_KEY
+
+# Full pipeline
+python github-trending/scripts/fetch_trending_full.py \
+  --tinyfish-key YOUR_KEY --since daily --count 12 --format markdown
+```
+
+## How Author Tweets Work
+
+The skill doesn't just search "project name" on Twitter (which returns KOL reposts). Instead:
+
+1. Extracts the repo owner from `owner/repo`
+2. Calls GitHub API to get the owner's **actual Twitter handle**
+3. Searches `"project from:author_handle site:x.com"` for precise results
+4. If no Twitter is set, falls back to `"owner project github site:x.com"`
+
+| Scenario | Search Strategy | Label |
+|----------|----------------|-------|
+| Author has Twitter | `from:handle` precise search | Author |
+| Org with Twitter | `from:org_handle` search | Org |
+| No Twitter set | `owner + repo + github` fallback | Community |
+
+## Project Structure
+
+```
+github-trending/
+├── SKILL.md                        # Skill instructions (read by AI)
+├── scripts/
+│   ├── fetch_trending.py           # GitHub trending scraper (zero deps)
+│   ├── search_social.py            # Author tweet search (GitHub API + TinyFish)
+│   └── fetch_trending_full.py      # Single-command full pipeline
+└── references/
+    ├── api-guide.md                # API details and rate limits
+    └── examples.md                 # Usage examples
+```
+
+## Requirements
+
+- Python 3.7+
+- Internet access
+- No external packages (stdlib only)
+- **Optional:** TinyFish API key for social media enrichment
+
+## License
+
+MIT
