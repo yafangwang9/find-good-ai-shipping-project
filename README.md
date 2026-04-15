@@ -1,6 +1,6 @@
-# GitHub Trending Skill
+[中文版](README_CN.md)
 
-真正在 shipping 产品的项目，往往不在融资列表和新闻里。[GitHub Trending](https://github.com/trending) 是发现它们的好方式。这个 Skill 帮你按每天或每周获取热门开源项目，并借助 [TinyFish](https://tinyfish.ai) 获取项目作者发布的社交媒体帖子——帮你判断这个项目的团队/作者是否值得 follow。
+# GitHub Trending Skill
 
 The best shipping products are rarely in funding lists or news. [GitHub Trending](https://github.com/trending) is where you find them. This skill fetches trending repos daily or weekly, and optionally pulls the authors' own social media posts via [TinyFish](https://tinyfish.ai) — helping you decide which builders are worth following.
 
@@ -56,10 +56,9 @@ export TINYFISH_API_KEY="sk-tinyfish-your-key-here"
 
 Once installed, the skill triggers when you ask about GitHub trending:
 
-- "今日 GitHub 热门项目"
 - "Show me this week's trending repos"
-- "本周 Rust 热门项目"
-- "What's trending on GitHub?"
+- "What's trending on GitHub today?"
+- "Trending Rust projects this week"
 
 ### What You Get
 
@@ -74,7 +73,7 @@ Once installed, the skill triggers when you ask about GitHub trending:
 ...
 ```
 
-**Phase 2 — Author tweets (optional, ~3 min for 12 repos):**
+**Phase 2 — Author tweets (optional):**
 
 ```
 1. forrestchang/andrej-karpathy-skills — Stars 37,254 / Today +9,263
@@ -82,9 +81,6 @@ Once installed, the skill triggers when you ask about GitHub trending:
 
    - I let Claude Code turn @karpathy's post into agent skills.
      It first generated a bunch of skill files and around 800 lines...
-
-   - To fix this, a dev turned those observations into a project
-     called andrej-karpathy-skills. It's just a single CLAUDE.md...
 ```
 
 ### Manual Script Usage
