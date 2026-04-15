@@ -2,7 +2,7 @@
 
 # GitHub Trending Skill
 
-The best shipping products are rarely in funding lists or news. [GitHub Trending](https://github.com/trending) is where you find them. This skill fetches trending repos daily or weekly, and optionally pulls the authors' own social media posts via [TinyFish](https://tinyfish.ai) — helping you decide which builders are worth following.
+The best shipping AI projects are rarely in funding lists or news. [GitHub Trending](https://github.com/trending) is where you find them. This skill fetches trending repos daily or weekly, and optionally pulls the authors' own social media posts via [TinyFish](https://tinyfish.ai) — helping you decide which builders are worth following.
 
 ## How It Works
 
