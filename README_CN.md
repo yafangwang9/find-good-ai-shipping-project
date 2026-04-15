@@ -141,3 +141,7 @@ github-trending/
 ## 许可证
 
 MIT
+
+---
+
+Built with [Cursor](https://cursor.com)

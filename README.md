@@ -141,3 +141,7 @@ github-trending/
 ## License
 
 MIT
+
+---
+
+Built with [Cursor](https://cursor.com)
